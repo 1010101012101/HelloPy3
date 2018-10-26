@@ -10,6 +10,7 @@ from libmccmd import cmd, dumpCpuInfo, dumpCpuSchedutil, dumpClk
 import time
 
 cmd("root", 'adb root')
+cmd("adb wait-for-device", "adb wait-for-device")
 time.sleep(2)
 
 
