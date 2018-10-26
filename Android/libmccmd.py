@@ -12,6 +12,11 @@ def cmd(lable, strcmd, printFlag=True):
         print(lable , reStr)
     return reStr
 
+def cat(path):
+    reStr = os.popen('adb shell "cat {}"'.format(path)).read()
+    print(reStr)
+    return reStr
+
 
 def dumpSchedPara():
     reStr = cmd("dumpSchedPara:", 'adb shell "ls /proc/sys/kernel/"', False)
@@ -86,6 +91,25 @@ def bootTime(outFile="1.txt"):
     reStr = cmd("bootTime:", 'adb shell "logcat -b events|grep boot"')
     with open(outFile, 'w') as wf:
         wf.write(reStr)
+
+
+def catClockScaling():
+    cmd("EMMC clk_measure:", 'adb shell "cat /d/clk/gcc_sdcc1_apps_clk/clk_measure"')
+    cmd("UFS clk_measure:", 'adb shell "cat /d/clk/gcc_ufs_phy_axi_clk/clk_measure"')
+
+
+def dumpClk(index):
+    print('HHH1:====>/sys/class/mmc_host/mmc{}/clk_scaling"'.format(index))
+    reStr = cmd("dumpCpuInfo", 'adb shell "ls /sys/class/mmc_host/mmc{}/clk_scaling"'.format(index), False)
+    
+    results = reStr.split()
+    lists = list()
+    for para in results:
+        cmd(para+":", 'adb shell "cat /sys/class/mmc_host/mmc{}/clk_scaling/{}"'.format(index, para))
+        lists.append(para)
+    #cmd("EMMC clk_measure:", 'adb shell "cat /d/clk/gcc_sdcc1_apps_clk/clk_measure"')
+    #cmd("UFS clk_measure:", 'adb shell "cat /d/clk/gcc_ufs_phy_axi_clk/clk_measure"')
+    return lists
     
 if __name__ == "__main__":
     #dumpSchedPara()
@@ -93,4 +117,8 @@ if __name__ == "__main__":
     #dumpGpuInfo()
     #getPid()
     #coreDump("com.ireadygo.app.systemupgrade", "debuggerd.txt")
-    bootTime()
+    #bootTime()
+    
+    #catClockScaling()
+    dumpClk(0)
+    dumpClk(1)
