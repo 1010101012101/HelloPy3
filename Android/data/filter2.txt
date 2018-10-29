@@ -1,0 +1,30 @@
+#from qcom documentation
+#doc info:
+#ADB Commands for Debugging Performance Issues
+#80-NR256-8 A
+#May 9, 2018
+#
+#key doc:
+#Kernel Configuration Must Remove
+#Sanity check:
+#For any performance measurement, the kernel configuration must be perf defconfig or th
+#following kernel configuration flags must be disabled. This is mandatory because these flags add
+#additional logging in the kernel, which degrades performance
+#
+
+CONFIG_PREEMPT_COUNT=y
+CONFIG_PREEMPT_TRACER=y
+CONFIG_SCHED_DEBUG=y
+CONFIG_DEBUG_KMEMLEAK=y
+CONFIG_DEBUG_KMEMLEAK_EARLY_LOG_SIZE=400
+CONFIG_DEBUG_KMEMLEAK_DEFAULT_OFF=y
+CONFIG_DEBUG_SPINLOCK=y
+CONFIG_DEBUG_MUTEXES=y
+CONFIG_DEBUG_ATOMIC_SLEEP=y
+CONFIG_DEBUG_STACK_USAGE=y
+CONFIG_DEBUG_LIST=y
+CONFIG_FAULT_INJECTION_DEBUG_FS=y
+CONFIG_LOCKUP_DETECTOR=y
+CONFIG_DEBUG_PAGEALLOC=y
+CONFIG_PAGE_POISONING=y
+CONFIG_SLUB_DEBUG=y
