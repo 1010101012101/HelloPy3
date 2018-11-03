@@ -2,7 +2,12 @@
 """
 Created on Wed Oct 24 11:41:10 2018
 
-@author: Administrator
+@author: mc.meng
+
+QCOM Dod:
+    Optimize Kernel Configuration Application Note
+    80-PJ035-1 A
+    May 9, 2018
 """
 
 import time
@@ -26,18 +31,17 @@ def get_filter(filter_file=None):
     return result
 
 
-def kernel_config_ptimization(src_file='./data/sdm710_i7s-perf_defconfig', filter_lile="./data/filter1.txt", author = None, out_file=None):
+def optimize_kernel_configuration(src_file='./data/sdm710_i7s-perf_defconfig', filter_lile="./data/filter1.txt", author = None, out_file=None):
     if out_file is None:
         out_file = src_file + ".out"
 
     rm_items = get_filter(filter_lile)
-    if rm_items == None or len(rm_items) == 0:
+    if rm_items is None or len(rm_items) == 0:
         print("getFilter{} failed".format(filter_lile))
         return
     
-    comText = "#DEL BEGIN: by {} on ".format(author) + time.strftime('%Y-%m-%d',time.localtime(time.time())) + "\r\n"
+    com_text = "#DEL BEGIN: by {} on ".format(author) + time.strftime('%Y-%m-%d', time.localtime(time.time())) + "\r"
 
-    #print(rm_items)
     context = ""
     with open(src_file) as rf:
         for line in rf:
@@ -48,9 +52,9 @@ def kernel_config_ptimization(src_file='./data/sdm710_i7s-perf_defconfig', filte
             item = line.strip().split('=')[0]
             #print(item)
             if item in rm_items:
-                #print("HHHA:1======================>", item)
+                print("HHHA:1======================>", item)
 
-                line = comText + "#" + line.strip() + "\r\n#DEL END\r\n"
+                line = com_text + "#" + line.strip() + "\r#DEL END\r"
                 print(item, "====>", line)
             context += line
             #print(len(line), line)
@@ -60,11 +64,33 @@ def kernel_config_ptimization(src_file='./data/sdm710_i7s-perf_defconfig', filte
     #print(context)
     
 
-kernel_config_ptimization("./data/sdm710_i7s-perf_defconfig", "./data/filter11.txt", "menghaocheng", "data/11.txt")
-kernel_config_ptimization("./data/sdm710_i7s-perf_defconfig", "./data/filter1.txt", "menghaocheng", "data/1.txt")
+#kernel_config_ptimization("./data/sdm710_i7s-perf_defconfig", "./data/filter1.txt", "menghaocheng", "data/1.txt")
 #kernel_config_ptimization("./data/sdm710_i7s-perf_defconfig", "./data/filter2.txt", "menghaocheng", "data/2.txt")
 #kernel_config_ptimization("./data/sdm710_i7s-perf_defconfig", "./data/filter3.txt", "menghaocheng", "data/3.txt")
 
-kernel_config_ptimization("./data/sdm710_i7s-perf_defconfig", "./data/filter1.txt", "menghaocheng")
 
-#getFilter()
+
+
+def optimize_configuration():
+    """
+    1.
+    Optimize Kernel Configuration Application Note
+    80-PJ035-1 A
+    May 9, 2018
+    2.
+    ADB Commands for Debugging Performance Issues
+    80-NR256-8 A
+    May 9, 2018
+    3.
+    SDM670 Performance Tuning Checklist
+    KBA-180129014006-1
+    Dec 29, 2017
+    """
+    optimize_kernel_configuration("./data/sdm710_i7s-perf_defconfig", "./data/filter1.txt", "menghaocheng")
+    optimize_kernel_configuration("./data/sdm710_i7s-perf_defconfig.out", "./data/filter1.txt", "menghaocheng")
+    optimize_kernel_configuration("./data/sdm710_i7s-perf_defconfig.out.out", "./data/filter1.txt", "menghaocheng")
+
+
+if __name__ == "__main__":
+    optimize_configuration()
+

@@ -1,14 +1,20 @@
-import time
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Oct 30 14:49:24 2018
+
+@author: mc.meng
+"""
+
 import os
-import shutil
+
 
 def adb_shell(cmd_str):
     print(cmd_str)
     return os.popen(cmd_str).read()
 
+
 def trace_background():
     """
-
     Issue not seen with USB/Wifi/Charger connected
     1.connect USB
     2. adb shell
@@ -19,7 +25,6 @@ def trace_background():
     7. Note:
         a)-b is for buffer size and -t is for atrace duration in second, -z is for compress; you may have to repeat step 3 several times until your issue reproduced
         b)if you atrace runs failed, please run atrace -list to list all supported categories, and change your atrace parameter accordingly.
-
     """
 
     #adb_shell('adb shell "atrace -z -b 20960 -t 12 gfx input audio view webview wm am hal app res dalvik rs bionic power sched freq idle load sync workq memreclaim > /data/local/tmpatrace.out &"')
