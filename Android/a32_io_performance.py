@@ -33,8 +33,8 @@ def benchmark_pre_condition():
     """
     adb_shell("adb wait-for-device root")
     adb_shell("adb wait-for-device")
-    #adb_shell("adb shell stop thermald")
-    #adb_shell('adb shell "stop thermal-engine"')
+    adb_shell("adb shell stop thermald")
+    adb_shell('adb shell "stop thermal-engine"')
     adb_shell('adb shell "echo 4 > /sys/devices/system/cpu/cpu0/core_ctl/min_cpus"')
     adb_shell('adb shell "echo 4 > /sys/devices/system/cpu/cpu4/core_ctl/min_cpus"')  # No such file or directory
     adb_shell('adb shell "echo 1 > /sys/devices/system/cpu/cpu1/online"')
@@ -139,6 +139,14 @@ def set_storage_parameters(blk_name="mmcblk0"):
     adb_shell("adb wait-for-device")
     #adb_shell('adb shell "echo 512 > /sys/block/{}/queue/minimum_io_size"'.format(blk_name))
     adb_shell('adb shell "echo 2048 > /sys/block/{}/queue/read_ahead_kb"'.format(blk_name))
+    #adb_shell('adb shell "echo 268435456 > /sys/block/{}/queue/discard_max_bytes"'.format(blk_name))
+    #adb_shell('adb shell "echo 512 > /sys/block/{}/queue/max_sectors_kb"'.format(blk_name))
+    #adb_shell('adb shell "echo 1 > /sys/block/{}/queue/nomerges"'.format(blk_name))
+    #adb_shell('adb shell "echo write throught > /sys/block/{}/queue/write_cache"'.format(blk_name))
+    adb_shell('adb shell "echo 1 > /sys/block/{}/queue/rq_affinity"'.format(blk_name))
+    adb_shell('adb shell "echo 1 > /sys/block/{}/queue/rotational"'.format(blk_name))
+
+
 
 
 if __name__ == "__main__":
