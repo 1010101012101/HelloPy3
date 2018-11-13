@@ -14,20 +14,32 @@ REGULARIZATION_RATE = 0.0001
 TRAINING_STEPS = 30000
 MOVING_AVERAGE_DECAY = 0.99
 
-import tensorflow as tf
 
-def inference(input_tensor, reuse=False):
+def inference(input_tensor, avg_class=None, reuse=False):
     with tf.variable_scope("layer1", reuse=reuse):
         weights = tf.get_variable("weights", [INPUT_NODE, LAYER1_NODE], initializer=tf.truncated_normal_initializer(stddev=0.1))
         biases = tf.get_variable("biases", [LAYER1_NODE], initializer=tf.constant_initializer(0.0))
-        layer1 = tf.nn.relu(tf.matmul(input_tensor, weights) + biases)
+        if avg_class:
+            layer1 = tf.nn.relu(tf.matmul(input_tensor, avg_class.average(weights)) + avg_class.average(biases))
+        else:
+            layer1 = tf.nn.relu(tf.matmul(input_tensor, weights) + biases)
 
     with tf.variable_scope("layer2", reuse=reuse):
         weights = tf.get_variable("weights", [LAYER1_NODE, OUTPUT_NODE], initializer=tf.truncated_normal_initializer(stddev=0.1))
         biases = tf.get_variable("biases", [OUTPUT_NODE], initializer=tf.constant_initializer(0.0))
-        layer2 = tf.matmul(layer1, weights) + biases
+        if avg_class:
+            layer2 = tf.matmul(layer1, avg_class.average(weights)) + avg_class.average(biases)
+        else:
+            layer2 = tf.matmul(layer1, weights) + biases
     return layer2
 
+
+def regularize(regularizer):
+    with tf.variable_scope("layer1", reuse=True):
+        reg = regularizer(tf.get_variable("weights"))
+    with tf.variable_scope("layer2", reuse=True):
+        reg += regularizer(tf.get_variable("weights"))
+    return reg
 
 
 # def inference(input_tensor, avg_class, weights1, biases1, weights2, biases2):
@@ -53,16 +65,16 @@ def train(mnist):
     global_step = tf.Variable(0, trainable=False)
 
     variable_averages = tf.train.ExponentialMovingAverage(MOVING_AVERAGE_DECAY, global_step)
-
     variables_averages_op = variable_averages.apply(tf.trainable_variables())
     #average_y = inference(x, variable_averages, weights1, biases1, weights2, biases2)
-    new_y = inference(x, True)
+    average_y = inference(x, variable_averages, True)
 
     cross_entropy = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=y, labels=tf.argmax(y_, 1))
     cross_entropy_mean = tf.reduce_mean(cross_entropy)
 
     regularizer = tf.contrib.layers.l2_regularizer(REGULARIZATION_RATE)
-    regularization = regularizer(weights1) + regularizer(weights2)
+    #regularization = regularizer(tf.get_variable("layer1/weights")) + regularizer(tf.get_variable("layer2/weights"))
+    regularization = regularize(regularizer)
     loss = cross_entropy_mean + regularization
 
     learning_rate = tf.train.exponential_decay(
