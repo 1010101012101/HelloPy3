@@ -1,3 +1,6 @@
+"""
+Reshaping arrays
+"""
 import numpy as np
 
 

@@ -1,3 +1,7 @@
+"""
+sigmoid函数的导数
+
+"""
 import numpy as np
 
 
@@ -22,4 +26,4 @@ def sigmoid_derivative(x):
 
 
 x = np.array([1, 2, 3])
-print ("sigmoid_derivative(x) = " + str(sigmoid_derivative(x)))
+print("sigmoid_derivative(x) = " + str(sigmoid_derivative(x)))

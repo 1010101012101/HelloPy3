@@ -20,6 +20,7 @@ def softmax(x):
     x_exp = np.exp(x)
 
     # Create a vector x_sum that sums each row of x_exp. Use np.sum(..., axis = 1, keepdims = True).
+    """axis=1是沿Y轴求和，即将每列求和"""
     x_sum = np.sum(x_exp, axis=1, keepdims=True)
 
     # Compute softmax(x) by dividing x_exp by x_sum. It should automatically use numpy broadcasting.
