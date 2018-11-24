@@ -24,7 +24,8 @@ def sigmoid(x):
 
     return s
 
-print(help(np))
-x = np.array([1, 2, 3])
+if __name__ == "__main__":
+    print(help(np))
+    x = np.array([1, 2, 3])
 
-print(sigmoid(x))
+    print(sigmoid(x))

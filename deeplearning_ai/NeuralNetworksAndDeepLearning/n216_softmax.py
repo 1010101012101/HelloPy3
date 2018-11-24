@@ -31,7 +31,8 @@ def softmax(x):
     return s
 
 
-x = np.array([
-    [9, 2, 5, 0, 0],
-    [7, 5, 0, 0 ,0]])
-print("softmax(x) = " + str(softmax(x)))
+if __name__ == "__main__":
+    x = np.array([
+        [9, 2, 5, 0, 0],
+        [7, 5, 0, 0 ,0]])
+    print("softmax(x) = " + str(softmax(x)))

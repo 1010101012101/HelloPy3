@@ -25,7 +25,8 @@ def normalizeRows(x):
     return x
 
 
-x = np.array([
-    [0, 3, 4],
-    [1, 6, 4]])
-print("normalizeRows(x) = " + str(normalizeRows(x)))
+if __name__ == "__main__":
+    x = np.array([
+        [0, 3, 4],
+        [1, 6, 4]])
+    print("normalizeRows(x) = " + str(normalizeRows(x)))

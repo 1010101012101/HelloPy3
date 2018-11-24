@@ -25,7 +25,8 @@ def basic_sigmoid(x):
     return s
 
 
-print(basic_sigmoid(3))
+if __name__ == "__main__":
+    print(basic_sigmoid(3))
 
-x = [1, 2, 3]
-print(basic_sigmoid(x))
+    x = [1, 2, 3]
+    print(basic_sigmoid(x))
