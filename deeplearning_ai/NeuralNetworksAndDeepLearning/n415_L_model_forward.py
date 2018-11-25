@@ -26,8 +26,7 @@ def L_model_forward(X, parameters):
     for l in range(1, L):
         A_prev = A
         ### START CODE HERE ### (≈ 2 lines of code)
-        A, cache = linear_activation_forward(A_prev, parameters["W" + str(l)], parameters["b" + str(l)],
-                                             activation="relu")
+        A, cache = linear_activation_forward(A_prev, parameters["W" + str(l)], parameters["b" + str(l)], activation="relu")
         caches.append(cache)
         ### END CODE HERE ###
 
