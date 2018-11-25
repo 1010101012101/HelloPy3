@@ -1,6 +1,6 @@
+from deeplearning_ai.NeuralNetworksAndDeepLearning.n410_dnn_utils import *
+from deeplearning_ai.NeuralNetworksAndDeepLearning.testCases_v4 import *
 import numpy as np
-
-from dnn_utils_v2 import sigmoid, sigmoid_backward, relu, relu_backward
 
 # GRADED FUNCTION: compute_cost
 
@@ -27,3 +27,13 @@ def compute_cost(AL, Y):
     assert (cost.shape == ())
 
     return cost
+
+
+def compute_cost_test():
+    Y, AL = compute_cost_test_case()
+
+    print("cost = " + str(compute_cost(AL, Y)))
+
+
+if __name__ == "__main__":
+    compute_cost_test()

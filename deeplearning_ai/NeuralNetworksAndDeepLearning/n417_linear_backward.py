@@ -1,3 +1,5 @@
+from deeplearning_ai.NeuralNetworksAndDeepLearning.n410_dnn_utils import *
+from deeplearning_ai.NeuralNetworksAndDeepLearning.testCases_v4 import *
 import numpy as np
 
 # GRADED FUNCTION: linear_backward
@@ -29,3 +31,17 @@ def linear_backward(dZ, cache):
     assert (db.shape == b.shape)
 
     return dA_prev, dW, db
+
+
+def linear_backward_test():
+    # Set up some test inputs
+    dZ, linear_cache = linear_backward_test_case()
+
+    dA_prev, dW, db = linear_backward(dZ, linear_cache)
+    print ("dA_prev = "+ str(dA_prev))
+    print ("dW = " + str(dW))
+    print ("db = " + str(db))
+
+
+if __name__ == "__main__":
+    linear_backward_test()

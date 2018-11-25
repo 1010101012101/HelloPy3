@@ -1,6 +1,6 @@
-import numpy as np
-#from n410_dnn_utils_v2 import sigmoid, sigmoid_backward, relu, relu_backward
 from deeplearning_ai.NeuralNetworksAndDeepLearning.n410_dnn_utils import *
+from deeplearning_ai.NeuralNetworksAndDeepLearning.testCases_v4 import *
+import numpy as np
 
 # GRADED FUNCTION: linear_activation_forward
 
@@ -23,14 +23,14 @@ def linear_activation_forward(A_prev, W, b, activation):
     if activation == "sigmoid":
         # Inputs: "A_prev, W, b". Outputs: "A, activation_cache".
         ### START CODE HERE ### (≈ 2 lines of code)
-        Z = np.dot(W, A_prev) + b
+        Z, linear_cache = linear_forward(A_prev, W, b)
         A, activation_cache = sigmoid(Z)
         ### END CODE HERE ###
 
     elif activation == "relu":
         # Inputs: "A_prev, W, b". Outputs: "A, activation_cache".
         ### START CODE HERE ### (≈ 2 lines of code)
-        Z = np.dot(W, A_prev) + b
+        Z, linear_cache = linear_forward(A_prev, W, b)
         A, activation_cache = relu(Z)
         ### END CODE HERE ###
 
@@ -38,3 +38,19 @@ def linear_activation_forward(A_prev, W, b, activation):
     cache = (linear_cache, activation_cache)
 
     return A, cache
+
+
+def linear_forward_test():
+    A_prev, W, b = linear_activation_forward_test_case()
+    print("A_prev=", A_prev)
+    print("W=", W)
+    print("b=", b)
+    A, linear_activation_cache = linear_activation_forward(A_prev, W, b, activation="sigmoid")
+    print("With sigmoid: A = " + str(A))
+
+    A, linear_activation_cache = linear_activation_forward(A_prev, W, b, activation="relu")
+    print("With ReLU: A = " + str(A))
+
+
+if __name__ == "__main__":
+    linear_forward_test()

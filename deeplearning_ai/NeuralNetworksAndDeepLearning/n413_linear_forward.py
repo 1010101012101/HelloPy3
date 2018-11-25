@@ -1,3 +1,5 @@
+from deeplearning_ai.NeuralNetworksAndDeepLearning.n410_dnn_utils import *
+from deeplearning_ai.NeuralNetworksAndDeepLearning.testCases_v4 import *
 import numpy as np
 
 
@@ -25,4 +27,5 @@ def linear_forward(A, W, b):
     cache = (A, W, b)
 
     return Z, cache
+
 

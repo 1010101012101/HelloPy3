@@ -1,6 +1,6 @@
+from deeplearning_ai.NeuralNetworksAndDeepLearning.n410_dnn_utils import *
+from deeplearning_ai.NeuralNetworksAndDeepLearning.testCases_v4 import *
 import numpy as np
-
-from dnn_utils_v2 import sigmoid, sigmoid_backward, relu, relu_backward
 
 # GRADED FUNCTION: L_model_forward
 
@@ -26,16 +26,28 @@ def L_model_forward(X, parameters):
     for l in range(1, L):
         A_prev = A
         ### START CODE HERE ### (≈ 2 lines of code)
-        A, cache = relu(np.dot(parameters['W' + str(l)], A_prev) + parameters['b' + str(l)])
-        caches.append((cache, A))
+        A, cache = linear_activation_forward(A_prev, parameters["W" + str(l)], parameters["b" + str(l)],
+                                             activation="relu")
+        caches.append(cache)
         ### END CODE HERE ###
 
     # Implement LINEAR -> SIGMOID. Add "cache" to the "caches" list.
     ### START CODE HERE ### (≈ 2 lines of code)
-    AL, cache = sigmoid(np.dot(parameters['W' + str(L)], A) + parameters['b' + str(L)])
-    caches.append((cache, AL))
+    AL, cache = linear_activation_forward(A, parameters["W" + str(L)], parameters["b" + str(L)], activation="sigmoid")
+    caches.append(cache)
     ### END CODE HERE ###
 
     assert (AL.shape == (1, X.shape[1]))
 
     return AL, caches
+
+
+def L_model_forward_test():
+    X, parameters = L_model_forward_test_case_2hidden()
+    AL, caches = L_model_forward(X, parameters)
+    print("AL = " + str(AL))
+    print("Length of caches list = " + str(len(caches)))
+
+
+if __name__ == "__main__":
+    L_model_forward_test()
