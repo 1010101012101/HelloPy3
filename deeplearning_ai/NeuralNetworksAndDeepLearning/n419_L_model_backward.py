@@ -1,3 +1,5 @@
+from deeplearning_ai.NeuralNetworksAndDeepLearning.n410_dnn_utils import *
+from deeplearning_ai.NeuralNetworksAndDeepLearning.testCases_v4 import *
 import numpy as np
 
 # GRADED FUNCTION: L_model_backward
@@ -50,3 +52,14 @@ def L_model_backward(AL, Y, caches):
         ### END CODE HERE ###
 
     return grads
+
+
+def L_model_backward_test():
+    AL, Y_assess, caches = L_model_backward_test_case()
+    # print(caches)
+    grads = L_model_backward(AL, Y_assess, caches)
+    print_grads(grads)
+
+
+if __name__ == "__main__":
+    L_model_backward_test()

@@ -1,5 +1,6 @@
 import numpy as np
-from dnn_utils_v2 import sigmoid, sigmoid_backward, relu, relu_backward
+#from n410_dnn_utils_v2 import sigmoid, sigmoid_backward, relu, relu_backward
+from deeplearning_ai.NeuralNetworksAndDeepLearning.n410_dnn_utils import *
 
 # GRADED FUNCTION: linear_activation_forward
 

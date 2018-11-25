@@ -1,3 +1,5 @@
+from deeplearning_ai.NeuralNetworksAndDeepLearning.n410_dnn_utils import *
+from deeplearning_ai.NeuralNetworksAndDeepLearning.testCases_v4 import *
 import numpy as np
 
 
@@ -32,3 +34,26 @@ def linear_activation_backward(dA, cache, activation):
         ### END CODE HERE ###
 
     return dA_prev, dW, db
+
+
+def linear_activation_backward_test():
+    dAL, linear_activation_cache = linear_activation_backward_test_case()
+    print(linear_activation_cache)
+
+    dA_prev, dW, db = linear_activation_backward(dAL, linear_activation_cache, activation="sigmoid")
+    print("sigmoid:")
+    print("dA_prev = " + str(dA_prev))
+    print("dW = " + str(dW))
+    print("db = " + str(db) + "\n")
+
+    dA_prev, dW, db = linear_activation_backward(dAL, linear_activation_cache, activation="relu")
+    print("relu:")
+    print("dA_prev = " + str(dA_prev))
+    print("dW = " + str(dW))
+    print("db = " + str(db))
+
+
+if __name__ == "__main__":
+    linear_activation_backward_test()
+
+

@@ -1,3 +1,4 @@
+from deeplearning_ai.NeuralNetworksAndDeepLearning.testCases_v4 import *
 import numpy as np
 
 
@@ -27,3 +28,16 @@ def update_parameters(parameters, grads, learning_rate):
     ### END CODE HERE ###
     return parameters
 
+
+def update_parameters_test():
+    parameters, grads = update_parameters_test_case()
+    parameters = update_parameters(parameters, grads, 0.1)
+
+    print("W1 = " + str(parameters["W1"]))
+    print("b1 = " + str(parameters["b1"]))
+    print("W2 = " + str(parameters["W2"]))
+    print("b2 = " + str(parameters["b2"]))
+
+
+if __name__ == "__main__":
+    update_parameters_test()
