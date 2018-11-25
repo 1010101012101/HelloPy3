@@ -1,5 +1,121 @@
 import numpy as np
 
+def initialize_parameters(n_x, n_h, n_y):
+    """
+    Argument:
+    n_x -- size of the input layer
+    n_h -- size of the hidden layer
+    n_y -- size of the output layer
+
+    Returns:
+    parameters -- python dictionary containing your parameters:
+                    W1 -- weight matrix of shape (n_h, n_x)
+                    b1 -- bias vector of shape (n_h, 1)
+                    W2 -- weight matrix of shape (n_y, n_h)
+                    b2 -- bias vector of shape (n_y, 1)
+    """
+
+    np.random.seed(1)
+
+    ### START CODE HERE ### (≈ 4 lines of code)
+    W1 = np.random.randn(n_h, n_x) * 0.01
+    b1 = np.zeros((n_h, 1))
+    W2 = np.random.randn(n_y, n_h) * 0.01
+    b2 = np.zeros((n_y, 1))
+    ### END CODE HERE ###
+
+    assert (W1.shape == (n_h, n_x))
+    assert (b1.shape == (n_h, 1))
+    assert (W2.shape == (n_y, n_h))
+    assert (b2.shape == (n_y, 1))
+
+    parameters = {"W1": W1,
+                  "b1": b1,
+                  "W2": W2,
+                  "b2": b2}
+
+    return parameters
+
+
+def initialize_parameters_deep(layer_dims):
+    """
+    Arguments:
+    layer_dims -- python array (list) containing the dimensions of each layer in our network
+
+    Returns:
+    parameters -- python dictionary containing your parameters "W1", "b1", ..., "WL", "bL":
+                    Wl -- weight matrix of shape (layer_dims[l], layer_dims[l-1])
+                    bl -- bias vector of shape (layer_dims[l], 1)
+    """
+
+    np.random.seed(3)
+    parameters = {}
+    L = len(layer_dims)  # number of layers in the network
+
+    for l in range(1, L):
+        ### START CODE HERE ### (≈ 2 lines of code)
+        parameters['W' + str(l)] = np.random.randn(layer_dims[l], layer_dims[l - 1]) * 0.01
+        parameters['b' + str(l)] = np.zeros((layer_dims[l], 1))
+        ### END CODE HERE ###
+
+        assert (parameters['W' + str(l)].shape == (layer_dims[l], layer_dims[l - 1]))
+        assert (parameters['b' + str(l)].shape == (layer_dims[l], 1))
+
+    return parameters
+
+
+def linear_forward(A, W, b):
+    """
+    Implement the linear part of a layer's forward propagation.
+
+    Arguments:
+    A -- activations from previous layer (or input data): (size of previous layer, number of examples)
+    W -- weights matrix: numpy array of shape (size of current layer, size of previous layer)
+    b -- bias vector, numpy array of shape (size of the current layer, 1)
+
+    Returns:
+    Z -- the input of the activation function, also called pre-activation parameter
+    cache -- a python dictionary containing "A", "W" and "b" ; stored for computing the backward pass efficiently
+    """
+
+    ### START CODE HERE ### (≈ 1 line of code)
+    Z = np.dot(W, A) + b
+    ### END CODE HERE ###
+
+    assert (Z.shape == (W.shape[0], A.shape[1]))
+    cache = (A, W, b)
+
+    return Z, cache
+
+
+def linear_backward(dZ, cache):
+    """
+    Implement the linear portion of backward propagation for a single layer (layer l)
+
+    Arguments:
+    dZ -- Gradient of the cost with respect to the linear output (of current layer l)
+    cache -- tuple of values (A_prev, W, b) coming from the forward propagation in the current layer
+
+    Returns:
+    dA_prev -- Gradient of the cost with respect to the activation (of the previous layer l-1), same shape as A_prev
+    dW -- Gradient of the cost with respect to W (current layer l), same shape as W
+    db -- Gradient of the cost with respect to b (current layer l), same shape as b
+    """
+    A_prev, W, b = cache
+    m = A_prev.shape[1]
+
+    ### START CODE HERE ### (≈ 3 lines of code)
+    dW = 1 / m * np.dot(dZ, A_prev.T)
+    db = 1 / m * np.sum(dZ, axis=1, keepdims=True)
+    dA_prev = np.dot(W.T, dZ)
+    ### END CODE HERE ###
+
+    assert (dA_prev.shape == A_prev.shape)
+    assert (dW.shape == W.shape)
+    assert (db.shape == b.shape)
+
+    return dA_prev, dW, db
+
 
 def sigmoid(x):
     """
@@ -82,59 +198,6 @@ def relu_backward(dA, cache):
     assert (dZ.shape == Z.shape)
 
     return dZ
-
-
-def linear_forward(A, W, b):
-    """
-    Implement the linear part of a layer's forward propagation.
-
-    Arguments:
-    A -- activations from previous layer (or input data): (size of previous layer, number of examples)
-    W -- weights matrix: numpy array of shape (size of current layer, size of previous layer)
-    b -- bias vector, numpy array of shape (size of the current layer, 1)
-
-    Returns:
-    Z -- the input of the activation function, also called pre-activation parameter
-    cache -- a python dictionary containing "A", "W" and "b" ; stored for computing the backward pass efficiently
-    """
-
-    ### START CODE HERE ### (≈ 1 line of code)
-    Z = np.dot(W, A) + b
-    ### END CODE HERE ###
-
-    assert (Z.shape == (W.shape[0], A.shape[1]))
-    cache = (A, W, b)
-
-    return Z, cache
-
-
-def linear_backward(dZ, cache):
-    """
-    Implement the linear portion of backward propagation for a single layer (layer l)
-
-    Arguments:
-    dZ -- Gradient of the cost with respect to the linear output (of current layer l)
-    cache -- tuple of values (A_prev, W, b) coming from the forward propagation in the current layer
-
-    Returns:
-    dA_prev -- Gradient of the cost with respect to the activation (of the previous layer l-1), same shape as A_prev
-    dW -- Gradient of the cost with respect to W (current layer l), same shape as W
-    db -- Gradient of the cost with respect to b (current layer l), same shape as b
-    """
-    A_prev, W, b = cache
-    m = A_prev.shape[1]
-
-    ### START CODE HERE ### (≈ 3 lines of code)
-    dW = 1 / m * np.dot(dZ, A_prev.T)
-    db = 1 / m * np.sum(dZ, axis=1, keepdims=True)
-    dA_prev = np.dot(W.T, dZ)
-    ### END CODE HERE ###
-
-    assert (dA_prev.shape == A_prev.shape)
-    assert (dW.shape == W.shape)
-    assert (db.shape == b.shape)
-
-    return dA_prev, dW, db
 
 
 def linear_activation_forward(A_prev, W, b, activation):
