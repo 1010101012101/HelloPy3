@@ -1,5 +1,5 @@
-from deeplearning_ai.NeuralNetworksAndDeepLearning.n410_dnn_utils import *
-from deeplearning_ai.NeuralNetworksAndDeepLearning.testCases_v4 import *
+from deeplearning_ai.L1_NeuralNetworksAndDeepLearning.n410_dnn_utils import *
+from deeplearning_ai.L1_NeuralNetworksAndDeepLearning.testCases_v4 import *
 import numpy as np
 
 

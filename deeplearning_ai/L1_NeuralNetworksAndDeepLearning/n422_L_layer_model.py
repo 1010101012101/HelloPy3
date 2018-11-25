@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 import scipy
 from PIL import Image
 from scipy import ndimage
-from deeplearning_ai.NeuralNetworksAndDeepLearning.n410_dnn_utils import *
-from deeplearning_ai.NeuralNetworksAndDeepLearning.testCases_v4 import *
+from deeplearning_ai.L1_NeuralNetworksAndDeepLearning.n410_dnn_utils import *
+from deeplearning_ai.L1_NeuralNetworksAndDeepLearning.testCases_v4 import *
 
 # GRADED FUNCTION: L_layer_model
 
