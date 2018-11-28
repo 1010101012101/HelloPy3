@@ -11,7 +11,7 @@ Week1->Setting up your achine Learning Application->Basic Recipe for Machine Lea
    \|/   N                                                              |
   High variance ?           =============>   More data                  |
  （dev set performance)             Y          Regularization
-    |                                          New architecture search)
+    |                                          (New architecture search)
    \|/  N
     Done
 
