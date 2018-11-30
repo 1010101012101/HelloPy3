@@ -220,6 +220,24 @@ def prim_num(max, min = 2):
     print(prims)
     return prims
 
+def diff_neighbor(max=210, min=2):
+    prims = prim_num(max, min)
+    litt_prim = 0
+    d = []
+    for big_prim in prims:
+        if litt_prim == 0:
+            litt_prim = big_prim
+            continue
+        d.append(big_prim - litt_prim)
+        print(big_prim,"-", litt_prim,"=",big_prim - litt_prim )
+        litt_prim = big_prim
+
+    return d
+
+
+def diff_neighbor_test():
+    print(diff_neighbor())
+
 
 def prim_num_test():
     prim_num(100)
@@ -237,4 +255,5 @@ def prim_num_test():
 
 if __name__ == "__main__":
     prim_num_test()
-    approximate(341)
+    approximate(209)
+    #diff_neighbor_test()
