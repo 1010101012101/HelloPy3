@@ -18,7 +18,7 @@ def sigmoid(z):
     x = tf.placeholder(tf.float32, name="x")
 
     # compute sigmoid(x)
-    sigmoid = tf.sigmoid()
+    sigmoid = tf.sigmoid(x)
 
     # Create a session, and run it. Please use the method 2 explained above.
     # You should use a feed_dict to pass z's value to x.
