@@ -35,4 +35,5 @@ if __name__ == "__main__":
     #dumpsys("settings")
     #dumpsys("storaged")
     #dumpsys("usb")
-    dumpsys("window")
+    #dumpsys("window")
+    dumpsys("jobscheduler")
