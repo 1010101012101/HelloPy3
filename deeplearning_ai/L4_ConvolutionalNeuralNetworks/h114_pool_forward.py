@@ -37,10 +37,10 @@ def pool_forward(A_prev, hparameters, mode="max"):
                 for c in range(n_C):  # loop over the channels of the output volume
 
                     # Find the corners of the current "slice" (≈4 lines)
-                    vert_start = w
-                    vert_end = w + f
-                    horiz_start = h
-                    horiz_end = h + f
+                    vert_start = h * stride
+                    vert_end = vert_start + f
+                    horiz_start = w * stride
+                    horiz_end = horiz_start + f
 
                     # Use the corners to define the current slice on the ith training example of A_prev, channel c. (≈1 line)
                     a_prev_slice = A_prev[vert_start:vert_end, horiz_start:horiz_end, :]

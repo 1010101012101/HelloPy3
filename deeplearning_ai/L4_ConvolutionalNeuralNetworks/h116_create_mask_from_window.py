@@ -1,4 +1,5 @@
 import numpy as np
+from deeplearning_ai.L4_ConvolutionalNeuralNetworks.h110_utils import *
 
 
 def create_mask_from_window(x):
@@ -13,14 +14,19 @@ def create_mask_from_window(x):
     """
 
     ### START CODE HERE ### (≈1 line)
-    mask = x== np.max(x)
+    mask = x == np.max(x)
     ### END CODE HERE ###
 
     return mask
 
 
-np.random.seed(1)
-x = np.random.randn(2,3)
-mask = create_mask_from_window(x)
-print('x = ', x)
-print("mask = ", mask)
+def create_mask_from_window_test():
+    np.random.seed(1)
+    x = np.random.randn(2,3)
+    mask = create_mask_from_window(x)
+    print('x = ', x)
+    print("mask = ", mask)
+
+
+if __name__ == "__main__":
+    create_mask_from_window_test()

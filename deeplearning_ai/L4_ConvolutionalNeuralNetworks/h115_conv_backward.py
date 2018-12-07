@@ -55,10 +55,10 @@ def conv_backward(dZ, cache):
                 for c in range(n_C):  # loop over the channels of the output volume
 
                     # Find the corners of the current "slice"
-                    vert_start = w
-                    vert_end = w + f
-                    horiz_start = h
-                    horiz_end = h + f
+                    vert_start = h * stride
+                    vert_end = vert_start + f
+                    horiz_start = w * stride
+                    horiz_end = horiz_start + f
 
                     # Use the corners to define the slice from a_prev_pad
                     a_slice = a_prev_pad[vert_start:vert_end, horiz_start:horiz_end, :]
@@ -78,18 +78,23 @@ def conv_backward(dZ, cache):
     return dA_prev, dW, db
 
 
-np.random.seed(1)
-A_prev = np.random.randn(10,4,4,3)
-W = np.random.randn(2,2,3,8)
-b = np.random.randn(1,1,1,8)
-hparameters = {"pad" : 2,
-               "stride": 2}
+def conv_backward_test():
+    np.random.seed(1)
+    A_prev = np.random.randn(10,4,4,3)
+    W = np.random.randn(2,2,3,8)
+    b = np.random.randn(1,1,1,8)
+    hparameters = {"pad" : 2,
+                   "stride": 2}
 
-Z, cache_conv = conv_forward(A_prev, W, b, hparameters)
+    Z, cache_conv = conv_forward(A_prev, W, b, hparameters)
 
-np.random.seed(1)
-#print("Z.shape:",Z.shape)
-dA, dW, db = conv_backward(Z, cache_conv)
-print("dA_mean =", np.mean(dA))
-print("dW_mean =", np.mean(dW))
-print("db_mean =", np.mean(db))
+    np.random.seed(1)
+    #print("Z.shape:",Z.shape)
+    dA, dW, db = conv_backward(Z, cache_conv)
+    print("dA_mean =", np.mean(dA))
+    print("dW_mean =", np.mean(dW))
+    print("db_mean =", np.mean(db))
+
+
+if __name__ == "__main__":
+    conv_backward_test()

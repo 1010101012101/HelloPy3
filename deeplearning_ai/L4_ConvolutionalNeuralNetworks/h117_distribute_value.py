@@ -1,4 +1,5 @@
 import numpy as np
+from deeplearning_ai.L4_ConvolutionalNeuralNetworks.h110_utils import *
 
 
 def distribute_value(dz, shape):
