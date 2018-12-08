@@ -38,5 +38,5 @@ model.fit(dataset, batch_size=32, epochs=10, steps_per_epoch=30,
 #model.fit(data, labels, epochs=10, batch_size=32,
 #          validation_data=(val_data, val_labels))
 
-# Don't forget to specify `steps_per_epoch` when calling `fit` on a dataset.
-#model.fit(dataset, epochs=10, steps_per_epoch=30)
+# Don't forget to specify `steps_per_epoch` when calling `fit` on a datasets.
+#model.fit(datasets, epochs=10, steps_per_epoch=30)
