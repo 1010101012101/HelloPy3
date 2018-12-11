@@ -11,4 +11,5 @@ b = [[1, 2],
 
 result = np.lib.pad(b, pad_width=(2,2), mode='constant', constant_values=0)
 print(result)
-
+np.max()
+np.argmax()

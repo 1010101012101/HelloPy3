@@ -16,3 +16,9 @@ with tf.Session() as sess:
     print("A:\n",sess.run(A))
     print("R:\n",sess.run(R))
     print("S:\n",sess.run(S))
+    tf.maximum()
+    tf.reduce_max
+    tf.arg_max
+    tf.argmax
+    tf.greater
+    tf.reduce_any
