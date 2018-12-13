@@ -15,6 +15,9 @@ def dumpsys_input():
 def dumpsys_list():
     adb_shell('adb shell "dumpsys -l" > data/dumpsys_list.txt')
 
+def service_list():
+    adb_shell('adb shell "service list" > data/service_list.txt')
+
 
 def dumpsys_settings():
     dumpsys("settings")
@@ -29,11 +32,13 @@ def dumpsys_wifi():
 
 if __name__ == "__main__":
     dumpsys_list()
-    #dumpsys_input()
+    service_list()
+    dumpsys_input()
     #dumpsys_permission()
     #dumpsys("package")
     #dumpsys("settings")
     #dumpsys("storaged")
     #dumpsys("usb")
     #dumpsys("window")
-    dumpsys("jobscheduler")
+    #dumpsys("jobscheduler")
+    dumpsys("activity")
