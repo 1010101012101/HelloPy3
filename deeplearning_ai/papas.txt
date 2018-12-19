@@ -1,1 +1,16 @@
+[Redmon et al.,2015, You Only Look Once:Unified real--time object detection]
+[Taigman et.al.,2014.DeepFace closing the gap to human level performance]
+[Schroff et al.,2015, FaceNet:A unified embedding for face recognition and clustering]
 [Hochreiter & Schmidhuber 1997.Long short-term memory]
+Image captioning:
+[Mao et.al,2014.Deep captioning with multimodal recurrent neural networks]
+[Vinyals et.al.,2014.Show and tell;Neural image caption generator]
+[Karpathy and Li,2015.Deep visual-semantic alignments for generating image descriptions]
+
+
+Bleu Score:
+[Papineni et.al,2002:A method for automatic evaluation of machine translation]
+Attention model [Bahdanau et.al.,2014.Neural machine translation by jointly learning to align and translate]
+
+[Bahdanau et.al.,2014.Neural machine translation by jointly learning to align and translate]
+[Xu et, al.,2015. Show, attend and tell;Neural image caption generation with visual attention]

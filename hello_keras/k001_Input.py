@@ -23,4 +23,5 @@ y = Dense(16, activation='softmax')(x)
 model = Model(x, y)
 print(model)
 print(type(model))
+model.predict()
 
