@@ -41,4 +41,4 @@ if __name__ == "__main__":
     #dumpsys("usb")
     dumpsys("window")
     #dumpsys("jobscheduler")
-    #dumpsys("activity")
+    dumpsys("activity")
