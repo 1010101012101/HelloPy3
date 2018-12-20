@@ -6,3 +6,6 @@ keras.layers.LSTM
 keras.layers.Bidirectional
 
 keras.layers.LSTM(128, return_sequences=True)(embeddings)
+
+keras.layers.Dropout
+keras.layers.Conv1D
