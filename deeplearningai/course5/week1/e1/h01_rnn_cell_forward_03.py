@@ -1,5 +1,5 @@
 import numpy as np
-from h00_utils import *
+from deeplearningai.course5.week1.e1.h00_utils import *
 
 
 def rnn_cell_forward(xt, a_prev, parameters):
