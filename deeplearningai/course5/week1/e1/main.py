@@ -17,7 +17,7 @@ def rnn_cell_forward(xt, a_prev, parameters):
                         by -- Bias relating the hidden-state to the output, numpy array of shape (n_y, 1)
     Returns:
     a_next -- next hidden state, of shape (n_a, m)
-    yt_pred -- prediction at timestep "t", numpy array of shape (n_y, m)
+    yt_pred -- prediction at timestep "t", nupy array of shape (n_y, m)
     cache -- tuple of values needed for the backward pass, contains (a_next, a_prev, xt, parameters)
     """
 
