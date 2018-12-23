@@ -3,6 +3,7 @@ from keras import layers
 from keras.layers import Input, Dense, Activation, ZeroPadding2D, BatchNormalization, Flatten, Conv2D
 from keras.layers import AveragePooling2D, MaxPooling2D, Dropout, GlobalMaxPooling2D, GlobalAveragePooling2D
 from keras.models import Model
+from keras.models import Model, load_model, Sequential
 from keras.preprocessing import image
 from keras.utils import layer_utils
 from keras.utils.data_utils import get_file
@@ -24,4 +25,4 @@ model = Model(x, y)
 print(model)
 print(type(model))
 model.predict()
-
+model.fit()
