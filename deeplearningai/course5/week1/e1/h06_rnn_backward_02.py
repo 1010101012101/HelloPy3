@@ -32,10 +32,11 @@ def rnn_backward(da, caches):
 
     # initialize the gradients with the right sizes (≈6 lines)
     dx = np.zeros((n_x, m, T_x))
-    dWax = np.zeros(parameters["Wax"].shape)
-    dWaa = np.zeros(parameters["Waa"].shape)
-    dba = np.zeros(parameters["ba"].shape)
-    da0 = np.zeros(a0.shape)
+    #dWax = np.zeros(parameters["Wax"].shape)
+    dWax = np.zeros_like(parameters["Wax"])
+    dWaa = np.zeros_like(parameters["Waa"])
+    dba = np.zeros_like(parameters["ba"])
+    da0 = np.zeros_like(a0)
     da_prevt = np.zeros((n_a, m))
 
     # Loop through all the time steps
