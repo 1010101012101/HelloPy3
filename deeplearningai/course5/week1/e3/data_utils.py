@@ -1,14 +1,20 @@
 from music_utils import * 
 from preprocess import * 
 from keras.utils import to_categorical
+import os
 
 chords, abstract_grammars = get_musical_data('data/original_metheny.mid')
 corpus, tones, tones_indices, indices_tones = get_corpus_data(abstract_grammars)
 N_tones = len(set(corpus))
 n_a = 64
-x_initializer = np.zeros((1, 1, 78))
-a_initializer = np.zeros((1, n_a))
-c_initializer = np.zeros((1, n_a))
+#x_initializer = np.zeros((1, 1, 78))
+#a_initializer = np.zeros((1, n_a))
+#c_initializer = np.zeros((1, n_a))
+
+np.random.seed(2)
+x_initializer = np.random.randn(1, 1, 78)
+a_initializer = np.random.randn(1, n_a)
+c_initializer = np.random.randn(1, n_a)
 
 def load_music_utils():
     chords, abstract_grammars = get_musical_data('data/original_metheny.mid')
@@ -18,7 +24,16 @@ def load_music_utils():
     return (X, Y, N_tones, indices_tones)
 
 
-def generate_music(inference_model, corpus = corpus, abstract_grammars = abstract_grammars, tones = tones, tones_indices = tones_indices, indices_tones = indices_tones, T_y = 10, max_tries = 1000, diversity = 0.5):
+def generate_music(inference_model,
+                   corpus = corpus,
+                   abstract_grammars = abstract_grammars,
+                   tones = tones,
+                   tones_indices = tones_indices,
+                   indices_tones = indices_tones,
+                   T_y = 10,
+                   max_tries = 1000,
+                   diversity = 0.5,
+                   out = "my_music.midi"):
     """
     Generates music using a model trained to learn musical patterns of a jazz soloist. Creates an audio stream
     to save the music and play it.
@@ -100,7 +115,7 @@ def generate_music(inference_model, corpus = corpus, abstract_grammars = abstrac
 
     # Save audio stream to fine
     mf = midi.translate.streamToMidiFile(out_stream)
-    mf.open("output/my_music.midi", 'wb')
+    mf.open(os.path.join("output/",out),  'wb')
     mf.write()
     print("Your generated music is saved in output/my_music.midi")
     mf.close()
