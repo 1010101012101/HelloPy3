@@ -47,6 +47,7 @@ def individual_income_tax(income=10000, social_base=10000, dis_tax=1000):
 
     fack_income = income*12
     real_income = income*12 - total_tax - social_insurance*12
+    print("全年：")
     print("税前：%.2f" % fack_income)
     print("到手：%.2f" % real_income)
     print("个税：%.2f" % total_tax)
