@@ -32,13 +32,14 @@ def dumpsys_wifi():
 
 if __name__ == "__main__":
     dumpsys_list()
-    service_list()
-    dumpsys_input()
+    #service_list()
+    #dumpsys_input()
     #dumpsys_permission()
     #dumpsys("package")
     #dumpsys("settings")
     #dumpsys("storaged")
     #dumpsys("usb")
-    dumpsys("window")
+    #dumpsys("window")
     #dumpsys("jobscheduler")
-    dumpsys("activity")
+    dumpsys("media.camera")
+    dumpsys("media.camera.proxy")
