@@ -45,3 +45,57 @@ def Emojify_V2(input_shape, word_to_vec_map, word_to_index):
     ### END CODE HERE ###
 
     return model
+
+X_train, Y_train = read_csv('data/train_emoji.csv')
+X_test, Y_test = read_csv('data/tesss.csv')
+maxLen = len(max(X_train, key=len).split())
+Y_oh_train = convert_to_one_hot(Y_train, C = 5)
+Y_oh_test = convert_to_one_hot(Y_test, C = 5)
+
+word_to_index, index_to_word, word_to_vec_map = read_glove_vecs('data/glove.6B.50d.txt')
+
+#embedding_layer = pretrained_embedding_layer(word_to_vec_map, word_to_index)
+#print("weights[0][1][3] =", embedding_layer.get_weights()[0][1][3])
+
+model = Emojify_V2((maxLen,), word_to_vec_map, word_to_index)
+model.summary()
+
+model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+X_train_indices = sentences_to_indices(X_train, word_to_index, maxLen)
+
+Y_train_oh = convert_to_one_hot(Y_train, C = 5)
+print("Y_train.shape:",Y_train.shape)
+print("Y_train_oh.shape:",Y_train_oh.shape)
+
+model.fit(X_train_indices, Y_train_oh, epochs = 50, batch_size = 32, shuffle=True)
+
+X_test_indices = sentences_to_indices(X_test, word_to_index, max_len = maxLen)
+Y_test_oh = convert_to_one_hot(Y_test, C = 5)
+print("maxLen:", maxLen)
+print("X_test_indices.shape:", X_test_indices.shape)
+print("Y_test.shape:", Y_test.shape)
+print("Y_test_oh.shape:", Y_test_oh.shape)
+
+loss, acc = model.evaluate(X_test_indices, Y_test_oh)
+
+print()
+print("Test accuracy = ", acc)
+
+# This code allows you to see the mislabelled examples
+C = 5
+y_test_oh = np.eye(C)[Y_test.reshape(-1)]
+X_test_indices = sentences_to_indices(X_test, word_to_index, maxLen)
+pred = model.predict(X_test_indices)
+for i in range(len(X_test)):
+    x = X_test_indices
+    num = np.argmax(pred[i])
+    if(num != Y_test[i]):
+        print('Expected emoji:'+ label_to_emoji(Y_test[i]) + ' prediction: '+ X_test[i] + label_to_emoji(num).strip())
+
+
+# Change the sentence below to see your prediction. Make sure all the words are in the Glove embeddings.
+x_test = np.array(['not feeling happy'])
+x_test = np.array(['love you'])
+X_test_indices = sentences_to_indices(x_test, word_to_index, maxLen)
+print(x_test[0] +' '+  label_to_emoji(np.argmax(model.predict(X_test_indices))))
