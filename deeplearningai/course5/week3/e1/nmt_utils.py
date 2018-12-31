@@ -246,6 +246,6 @@ def plot_attention_map(model, input_vocabulary, inv_output_vocabulary, text, n_s
     # add grid and legend
     ax.grid()
 
-    #f.show()
+    f.show()
     
     return attention_map
