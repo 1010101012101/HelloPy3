@@ -71,3 +71,5 @@ model.compile(loss='binary_crossentropy', optimizer=opt, metrics=["accuracy"])
 model.fit(X, Y, batch_size = 5, epochs=1)
 
 
+loss, acc = model.evaluate(X_dev, Y_dev)
+print("Dev set accuracy = ", acc)
