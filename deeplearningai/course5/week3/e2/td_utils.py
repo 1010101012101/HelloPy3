@@ -11,9 +11,12 @@ def graph_spectrogram(wav_file):
     noverlap = 120 # Overlap between windows
     nchannels = data.ndim
     if nchannels == 1:
+        print("HHHA:0====>")
         pxx, freqs, bins, im = plt.specgram(data, nfft, fs, noverlap = noverlap)
     elif nchannels == 2:
+        print("HHHA:1====>")
         pxx, freqs, bins, im = plt.specgram(data[:,0], nfft, fs, noverlap = noverlap)
+    plt.show()
     return pxx
 
 # Load a wav file
