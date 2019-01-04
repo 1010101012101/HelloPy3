@@ -1,3 +1,7 @@
+[LeCun et al., 1998. Gradient-based learning applied to document recognition]
+[Simonyan & Zisserman 2015. Very deep convolutional networks for large-scale image recognition]
+[He et,al. 2015.Deep residual networks for image recognition]
+[Szegedy et al.2014.Going deeper with convolutions]
 [Redmon et al.,2015, You Only Look Once:Unified real--time object detection]
 [Taigman et.al.,2014.DeepFace closing the gap to human level performance]
 [Schroff et al.,2015, FaceNet:A unified embedding for face recognition and clustering]
