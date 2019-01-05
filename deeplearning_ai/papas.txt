@@ -2,7 +2,9 @@ ConvNet:
 [LeCun et al., 1998. Gradient-based learning applied to document recognition]
 [Simonyan & Zisserman 2015. Very deep convolutional networks for large-scale image recognition]
 [He et,al. 2015.Deep residual networks for image recognition]
-
+[Sermanet et,al.,2014,OverFeat:Integrated recognition, localization and detection using convolutional networks]
+[Redmon et al.,2015, You Only Look Once: Unified real-time object detection]
+[Girshik et.al,2013,Rich feature hierarchies for accurate object detection and semantic segmentation]
 [Szegedy et al.2014.Going deeper with convolutions]
 [Redmon et al.,2015, You Only Look Once:Unified real--time object detection]
 [Taigman et.al.,2014.DeepFace closing the gap to human level performance]
