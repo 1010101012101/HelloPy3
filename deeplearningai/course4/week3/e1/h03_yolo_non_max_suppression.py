@@ -26,7 +26,7 @@ def yolo_non_max_suppression(scores, boxes, classes, max_boxes = 10, iou_thresho
 
     # Use tf.image.non_max_suppression() to get the list of indices corresponding to boxes you keep
     ### START CODE HERE ### (≈ 1 line)
-    nms_indices = tf.image.non_max_suppression(boxes, scores, max_boxes ,iou_threshold)
+    nms_indices = tf.image.non_max_suppression(boxes, scores, max_boxes_tensor ,iou_threshold)
     ### END CODE HERE ###
 
     # Use K.gather() to select only nms_indices from scores, boxes and classes
