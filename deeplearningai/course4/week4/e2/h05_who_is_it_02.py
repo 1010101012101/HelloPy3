@@ -60,4 +60,4 @@ database["felix"] = img_to_encoding("images/felix.jpg", FRmodel)
 database["benoit"] = img_to_encoding("images/benoit.jpg", FRmodel)
 database["arnaud"] = img_to_encoding("images/arnaud.jpg", FRmodel)
 
-who_is_it("images/camera_0.jpg", database, FRmodel)
+who_is_it("images/camera_7.jpg", database, FRmodel)
