@@ -56,5 +56,5 @@ def individual_income_tax(income=10000, social_base=10000, dis_tax=1000):
 
 
 if __name__ == "__main__":
-    individual_income_tax(12800, 12800, 0)
+    individual_income_tax(12800, 12800, 1500)
 
